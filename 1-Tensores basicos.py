@@ -63,12 +63,23 @@ print(x[::2])
 #Mecanica interessante para pular partes do vetor
 indices=tf.constant([0,3])
 x_ind = tf.gather(x,indices)
-print(x_ind)
+# print(x_ind)
 
 x=tf.constant([[2,1,3],
 	[2,1,3],
 	[4,1,2]])
-print(x[0,:])
-print(x[0:2,:])
-#Depois da virgula seria em quantas dimensoes eu quero fazer a selecao de parte da matriz
+# print(x[0,:])
+# print(x[0:2,:])
+#Depois da virgula seria em quantas dimensoes eu quero fazer a selecao de parte da matriz, caso eu pusesse : e todas, se pusese 0:1 seria so uam e assim vai
+
 #Reshaping
+
+x=tf.range(9)
+print(x)
+
+x=tf.reshape(x,(3,3))
+print(x)
+
+x=tf.transpose(x,perm=[1,0])
+#Transpote vem de transposta basicamente vc gira a matriz, nesse caso so uma vez, caso queria mais e so aumentar o numero de vezes
+print(x)
