@@ -2,7 +2,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
+from tensorflow.keras import layers, regularizers
 from tensorflow.keras.datasets import cifar10
 
 (x_train,y_train),(x_test,y_test) = cifar10.load_data()
@@ -32,19 +32,22 @@ model=keras.Sequential(
 #Functional
 def meu_modelo():
 	inputs = keras.Input(shape=(32, 32, 3))
-	x = layers.Conv2D(32, 3)(inputs)
+	x = layers.Conv2D(32, 3,padding='same', kernel_regularizer=regularizers.l2(0.01))(inputs)
+	#Acrescentanto regularizer para diminuir o overfitting entre a data treinada e a data testada
 	x = layers.BatchNormalization()(x)
 	x = keras.activations.relu(x)
 	x = layers.MaxPooling2D()(x)
-	x = layers.Conv2D(64, 3)(x)
+	x = layers.Conv2D(64, 3,padding='same', kernel_regularizer=regularizers.l2(0.01))(x)
 	x = layers.BatchNormalization()(x)
 	x = keras.activations.relu(x)
 	x = layers.MaxPooling2D()(x)
-	x = layers.Conv2D(128, 3)(x)
+	x = layers.Conv2D(128, 3,padding='same', kernel_regularizer=regularizers.l2(0.01))(x)
 	x = layers.BatchNormalization()(x)
+	#Batch normalization serve para melhorar a situacao dela 'normalizando' ver video teorico
 	x = keras.activations.relu(x)
 	x = layers.Flatten()(x)
-	x = layers.Dense(64, activation="relu")(x)
+	x = layers.Dense(64, activation="relu", kernel_regularizer=regularizers.l2(0.01))(x)
+	x = layers.Dropout(0.5)(x)
 	outputs = layers.Dense(10)(x)
 	model = keras.Model(inputs=inputs, outputs=outputs)
 	return model
