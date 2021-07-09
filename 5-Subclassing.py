@@ -16,7 +16,6 @@ class CNNBlock(layers.Layer):
         super(CNNBlock, self).__init__()
         self.conv = layers.Conv2D(out_channels, kernel_size, padding="same")
         self.bn = layers.BatchNormalization()
-
     def call(self, input_tensor, training=False):
         x = self.conv(input_tensor)
         x = self.bn(x, training=training)
@@ -64,7 +63,7 @@ class ResNet_Like(keras.Model):
         x = self.pool(x, training=training)
         x = self.classifier(x)
         return x
-
+    #Para consiguir visualizar o shape
     def model(self):
         x = keras.Input(shape=(28, 28, 1))
         return keras.Model(inputs=[x], outputs=self.call(x))
@@ -85,3 +84,4 @@ model.compile(
 model.fit(x_train, y_train, batch_size=64, epochs=1, verbose=2)
 model.evaluate(x_test, y_test, batch_size=64, verbose=2)
 model.save("pretrained")
+#Garantindo,
