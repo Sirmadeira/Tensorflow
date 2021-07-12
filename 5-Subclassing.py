@@ -14,6 +14,7 @@ x_test = x_test.reshape(-1, 28, 28, 1).astype("float32") / 255.0
 class CNNBlock(layers.Layer):
     def __init__(self, out_channels, kernel_size=3):
         super(CNNBlock, self).__init__()
+        #Super serve para eu poder modificar os metodos, e subescrevelos
         self.conv = layers.Conv2D(out_channels, kernel_size, padding="same")
         self.bn = layers.BatchNormalization()
     def call(self, input_tensor, training=False):
