@@ -20,7 +20,7 @@ model.add(
 		layers.SimpleRNN(256, return_sequences=True,activation='relu')
 		)
 	)
-#Biderectional como discutid na teorica, e repetir o numero de nodes so que ao contrario
+#Biderectional como discutido na teorica, e repetir o numero de nodes so que ao contrario
 #Para ativar  uma funcao recorrent gru ou lstm e so trocar o nome SIMPLERNN POR GRU LSTM
 #Return sequences,monta um timestep seria o loop interno da data por um node, o que faz dela recurrent. Nesse caso o loop e 28 vezes
 model.add(layers.SimpleRNN(256,activation='relu'))
